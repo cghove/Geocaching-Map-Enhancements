@@ -18,7 +18,7 @@
 // @connect     geo-en.hlipp.de
 // @connect     api.geonames.org
 // @connect     api.postcodes.io
-// @connect     www.geocaching.com
+// @connect     https://www.geocaching.com/map/
 // @icon        https://raw.githubusercontent.com/cghove/Geocaching-Map-Enhancements/main/icon/GeocachingMap48.png
 // @icon64      https://raw.githubusercontent.com/cghove/Geocaching-Map-Enhancements/main/icon/GeocachingMap64.png
 // @updateURL   https://github.com/cghove/Geocaching-Map-Enhancements/raw/main/GeocachingMapEnhancements.meta.js
