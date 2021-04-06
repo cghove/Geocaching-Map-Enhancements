@@ -3,7 +3,7 @@
 // @version     0.8.3
 // @author      cghove
 // @oujs:author JRI
-// @namespace   inge.org.uk/userscripts
+// @namespace   https://github.com/cghove/Geocaching-Map-Enhancements
 // @description Adds extra maps and grid reference search to Geocaching.com, along with several other enhancements.
 // @include     https://www.geocaching.com/*
 // @license     MIT; http://www.opensource.org/licenses/mit-license.php
@@ -19,8 +19,8 @@
 // @connect     api.geonames.org
 // @connect     api.postcodes.io
 // @connect     www.geocaching.com
-// @icon        https://geo.inge.org.uk/userscripts/GeocachingMap48.png
-// @icon64      https://geo.inge.org.uk/userscripts/GeocachingMap64.png
-// @updateURL   https://geo.inge.org.uk/userscripts/GeocachingMapEnhancements.meta.js
-// @downloadURL https://openuserjs.org/install/JRI/Geocaching_Map_Enhancements.user.js
+// @icon        https://raw.githubusercontent.com/cghove/Geocaching-Map-Enhancements/main/icon/GeocachingMap48.png
+// @icon64      https://raw.githubusercontent.com/cghove/Geocaching-Map-Enhancements/main/icon/GeocachingMap64.png
+// @updateURL   https://github.com/cghove/Geocaching-Map-Enhancements/raw/main/GeocachingMapEnhancements.meta.js
+// @downloadURL https://github.com/cghove/Geocaching-Map-Enhancements/raw/main/Geocaching_Map_Enhancements.user.js
 // ==/UserScript==
