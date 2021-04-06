@@ -19,10 +19,10 @@
 // @connect     api.geonames.org
 // @connect     api.postcodes.io
 // @connect     www.geocaching.com
-// @icon        https://github.com/cghove/Geocaching-Map-Enhancements/blob/563503d3484211f1cef3d7e46790338ab05e128d/icon/GeocachingMap48.png
-// @icon64      https://github.com/cghove/Geocaching-Map-Enhancements/blob/563503d3484211f1cef3d7e46790338ab05e128d/icon/GeocachingMap64.png
+// @icon        https://raw.githubusercontent.com/cghove/Geocaching-Map-Enhancements/main/icon/GeocachingMap48.png
+// @icon64      https://raw.githubusercontent.com/cghove/Geocaching-Map-Enhancements/main/icon/GeocachingMap64.png
 // @updateURL   https://github.com/cghove/Geocaching-Map-Enhancements/blob/563503d3484211f1cef3d7e46790338ab05e128d/GeocachingMapEnhancements.meta.js
-// @downloadURL https://github.com/cghove/Geocaching-Map-Enhancements/blob/563503d3484211f1cef3d7e46790338ab05e128d/Geocaching_Map_Enhancements.user.js
+// @downloadURL https://github.com/cghove/Geocaching-Map-Enhancements/raw/main/Geocaching_Map_Enhancements.user.js
 // ==/UserScript==
 
 /* jshint multistr: true */
@@ -69,7 +69,7 @@ var gmeResources = {
 			.GME_search_results.hidden { display: none; }\
 			.groundspeak-control-findmylocation { border: 1px solid #888; border-radius: 5px; box-shadow: 0 0 8px rgba(0, 0, 0, 0.4); padding:0; background:rgba(255,255,255,0.8);}\
 			.groundspeak-control-findmylocation a { padding: 3px; }\
-			.gme-button { display: inline-block; box-sizing: content-box; -moz-box-sizing: content-box; padding:3px; vertical-align:middle; background:url(https://github.com/cghove/Geocaching-Map-Enhancements/blob/563503d3484211f1cef3d7e46790338ab05e128d/icon/icons-18-black.png) no-repeat #eee; background-color: rgba(255,255,255,0.8); border: 1px solid #888; border-right:0; height:19px; width:19px; text-decoration: none; }\
+			.gme-button { display: inline-block; box-sizing: content-box; -moz-box-sizing: content-box; padding:3px; vertical-align:middle; background:url(https://raw.githubusercontent.com/cghove/Geocaching-Map-Enhancements/main/icon/icons-18-black.png) no-repeat #eee; background-color: rgba(255,255,255,0.8); border: 1px solid #888; border-right:0; height:19px; width:19px; text-decoration: none; }\
 			.gme-button-l { border-bottom-left-radius:5px; border-top-left-radius:5px; }\
 			.gme-button-r { border-right: 1px solid #888; border-bottom-right-radius: 5px; border-top-right-radius:5px; margin-right:0.5em;}\
 			.gme-button:hover { background-color: #fff; }\
@@ -78,7 +78,7 @@ var gmeResources = {
 			span.gme-button, .gme-button-wide { padding-left:5px; padding-right:5px; font-size:12px; font-weight:bold; width:auto; background-image:none; color: #424242; }\
 			.GME_home { background-position: -572px 4px;}\
 			.GME_config { background-position: -284px 4px;}\
-			.GME_route, .GME_hide {background: url(https://github.com/cghove/Geocaching-Map-Enhancements/blob/563503d3484211f1cef3d7e46790338ab05e128d/icon/gme_icons_0_8_0.png) no-repeat #eee;}\
+			.GME_route, .GME_hide {background: url(https://raw.githubusercontent.com/cghove/Geocaching-Map-Enhancements/main/icon/gme_icons_0_8_0.png) no-repeat #eee;}\
 			.GME_route { background-position: 7px 3px;}\
 			.GME_route.gme-button-active { background-position: 5px 1px;}\
 			.GME_hide { background-position: -17px 3px;}\
