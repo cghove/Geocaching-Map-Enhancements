@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name        Geocaching Map Enhancements
-// @version     0.8.3
+// @version     0.8.4
 // @author      cghove
 // @oujs:author JRI
-// @namespace   inge.org.uk/userscripts
+// @namespace   ttps://github.com/cghove/Geocaching-Map-Enhancements
 // @description Adds extra maps and grid reference search to Geocaching.com, along with several other enhancements.
 // @include     https://www.geocaching.com/*
 // @license     MIT; http://www.opensource.org/licenses/mit-license.php
@@ -18,7 +18,7 @@
 // @connect     geo-en.hlipp.de
 // @connect     api.geonames.org
 // @connect     api.postcodes.io
-// @connect     https://www.geocaching.com/map/
+// @connect     https://www.geocaching.com/
 // @icon        https://raw.githubusercontent.com/cghove/Geocaching-Map-Enhancements/main/icon/GeocachingMap48.png
 // @icon64      https://raw.githubusercontent.com/cghove/Geocaching-Map-Enhancements/main/icon/GeocachingMap64.png
 // @updateURL   https://github.com/cghove/Geocaching-Map-Enhancements/blob/563503d3484211f1cef3d7e46790338ab05e128d/GeocachingMapEnhancements.meta.js
@@ -34,8 +34,8 @@
 var gmeResources = {
 	parameters: {
 		// Defaults
-		version: "0.8.2",
-		versionMsg: "Bugfix update: improves display of lists and PQs on geocaching map.",
+		version: "0.8.4",
+		versionMsg: "Bugfix update: fixed bug with missing settings icon etc, forked to github.",
 		brightness: 1,	// Default brightness for maps (0-1), can be overridden by custom map parameters.
 		filterFinds: false, // True filters finds out of list searches.
 		follow: false,	// Locator widget follows current location (moving map mode)
@@ -46,7 +46,7 @@ var gmeResources = {
 		maps: [
 	//	{alt:"Readable Name", tileUrl: "URL template including {s} (subdomain) and either {q} (quadkey) or {x},{y},{z} (Google/TMS tile coordinates + zoom)", subdomains: "0123", minZoom: 0, maxZoom: 24, attribution: "Copyright message (HTML allowed)", name: "shortname", overlay:false }
 			{alt:"OpenStreetMap",tileUrl:"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",name:"osm",subdomains:"abc"},
-			{alt:"OpenCycleMap",tileUrl:"https://tile.thunderforest.com/cycle/{z}/{x}/{y}.png",name:"ocm"},
+            {alt:"OpenCycleMap",tileUrl:"https://tile.thunderforest.com/cycle/{z}/{x}/{y}.png",name:"ocm"},
 			{alt:"Bing Maps", tileUrl: "https://ecn.t{s}.tiles.virtualearth.net/tiles/r{q}?g=864&mkt=en-gb&lbl=l1&stl=h&shading=hill&n=z", subdomains: "0123", minZoom: 1, maxZoom: 20, attribution: "<a href=\'https://www.bing.com/maps/\'>Bing</a> map data copyright Microsoft and its suppliers", name: "bingmap",ignore:true},
 			{alt:"Bing Aerial View", tileUrl:"https://ecn.t{s}.tiles.virtualearth.net/tiles/a{q}?g=737&n=z", subdomains: "0123", minZoom: 1, maxZoom: 20, attribution: "<a href=\'https://www.bing.com/maps/\'>Bing</a> map data copyright Microsoft and its suppliers", name: "bingaerial" },
 			{alt:"Google Maps",tileUrl:"https://mt.google.com/vt?&x={x}&y={y}&z={z}",name:"googlemaps",attribution:"<a href=\'https://maps.google.com/\'>Google</a> Maps",subdomains:"1234",tileSize:256,maxZoom:22},
@@ -54,7 +54,7 @@ var gmeResources = {
 			{alt:"Freemap Slovakia Hiking", tileUrl: "http://t{s}.freemap.sk/T/{z}/{x}/{y}.jpeg", attribution: "Map &copy; <a href='http://www.freemap.sk/'>Freemap Slovakia</a>, data &copy; <a href='http://openstreetmap.org'>OpenStreetMap</a> contributors", subdomains: "1234", minZoom: 8, maxZoom: 16, ignore: true},
 			{alt:"Freemap Slovakia Bicycle", tileUrl: "http://t{s}.freemap.sk/C/{z}/{x}/{y}.jpeg", attribution: "Map &copy; <a href='http://www.freemap.sk/'>Freemap Slovakia</a>, data &copy; <a href='http://openstreetmap.org'>OpenStreetMap</a> contributors", subdomains: "1234", minZoom: 8, maxZoom: 16, ignore: true},
 			{alt:"Freemap Slovakia Car", tileUrl: "http://t{s}.freemap.sk/A/{z}/{x}/{y}.jpeg", attribution: "Map &copy; <a href='http://www.freemap.sk/'>Freemap Slovakia</a>, data &copy; <a href='http://openstreetmap.org'>OpenStreetMap</a> contributors", subdomains: "1234", minZoom: 8, maxZoom: 16, ignore: true},
-			{alt:"Hillshading", tileUrl:"http://{s}.tiles.wmflabs.org/hillshading/{z}/{x}/{y}.png", subdomains: "abc", attribution:"Hillshading by <a	 href=\'https://wiki.openstreetmap.org/wiki/Hike_%26_Bike_Map\'>Colin Marquardt</a> from NASA SRTM data", overlay: true}
+            {alt:"Hillshading", tileUrl:"http://{s}.tiles.wmflabs.org/hillshading/{z}/{x}/{y}.png", subdomains: "abc", attribution:"Hillshading by <a	 href=\'https://wiki.openstreetmap.org/wiki/Hike_%26_Bike_Map\'>Colin Marquardt</a> from NASA SRTM data", overlay: true}
 		]
 	},
 	css: {
@@ -197,7 +197,8 @@ var gmeResources = {
 				<div class="gme-tab-content">\
 					<div class="gme-fieldgroup">\
 						<h3>Geocaching Map Enhancements</h3><br />\
-						<p>v<span id="GME_version"></span> &copy; 2011-2018 James Inge. Geocaching Map Enhancements is licensed for reuse under the <a target="_blank" rel="noopener noreferrer" href="http://www.opensource.org/licenses/mit-license.php">MIT License</a>. For documentation, see <a target="_blank" rel="noopener noreferrer" href="http://geo.inge.org.uk/gme.htm">http://geo.inge.org.uk/gme.htm</a></p>\
+						<p>v<span id="GME_version"></span> &copy; 2021-current cghove have started to work on James Inge s original work. Geocaching Map Enhancements is licensed for reuse under the <a target="_blank" rel="noopener noreferrer" href="http://www.opensource.org/licenses/mit-license.php">MIT License</a>. For documentation, see <a target="_blank" rel="noopener noreferrer" href="https://github.com/cghove/Geocaching-Map-Enhancements">https://github.com/cghove/Geocaching-Map-Enhancements</a></p>\
+                        <p>v0.8.2 © 2011-2018 James Inge. Geocaching Map Enhancements is licensed for reuse under the <a target="_blank" rel="noopener noreferrer" href="http://www.opensource.org/licenses/mit-license.php">MIT License</a>. For documentation, see <a target="_blank" rel="noopener noreferrer" href="http://geo.inge.org.uk/gme.htm">http://geo.inge.org.uk/gme.htm</a></p>\
 						<p>Elevation and reverse geocoding data provided by <a target="_blank" rel="noopener noreferrer" href="http://www.geonames.org/">GeoNames</a> and used under a <a target="_blank" rel="noopener noreferrer" href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a> (CC-BY) License.</p>\
 						<p>Grid reference manipulation is adapted from code &copy; 2005-2014 Chris Veness (<a target="_blank" rel="noopener noreferrer" href="http://www.movable-type.co.uk/scripts/latlong-gridref.html">www.movable-type.co.uk/scripts/latlong-gridref.html</a>, used under a <a target="_blank" rel="noopener noreferrer" href="https://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0</a> (CC-BY) License.</p>\
 						<p>Photos provided by Geograph are copyright their respective owners - hover mouse over thumbnails or click through for attribution details. They may be re-used under a <a target="_blank" rel="noopener noreferrer" href="https://creativecommons.org/licenses/by-sa/2.0/">Creative Commons Attribution-ShareAlike 2.0</a> (CC-BY-SA) License.</p>\
@@ -303,7 +304,7 @@ var gmeResources = {
 						bounds_NI = new L.LatLngBounds(new L.LatLng(54,-8.25),new L.LatLng(55.73,-5.25));
 						bounds_CI = new L.LatLngBounds(new L.LatLng(49.1,-2.8),new L.LatLng(49.8,-1.8));
 						bounds_DE = new L.LatLngBounds(new L.LatLng(47.24941,5.95459),new L.LatLng(55.14121,14.89746));
-						L.GME_DistLine = L.Polyline.extend(polylineObj); 
+						L.GME_DistLine = L.Polyline.extend(polylineObj);
 						L.GME_QuadkeyLayer = L.TileLayer.extend(quadkeyLayerObj);
 						L.GME_complexLayer = L.TileLayer.extend(complexLayerObj);
 						L.GME_genericLayer = genericLayerFn;
@@ -324,7 +325,7 @@ var gmeResources = {
 					}
 				},
 				j;
-				
+
 				for (j = 0; j < scriptArray.length; j++) {
 					if (initScripts.hasOwnProperty(scriptArray[j]) && typeof initScripts[scriptArray[j]] === "function") {
 						initScripts[scriptArray[j]]();
@@ -465,7 +466,7 @@ var gmeResources = {
                     warn: logFn
                 };
 			}
-			
+
 			if (gmeConfig.env.xhr) {
 				JSONP = function (url, id) {
 					console.log("GME: Using GM_xhr to fetch " + url);
@@ -508,7 +509,7 @@ var gmeResources = {
 			}
 
 			gmeConfig.env.home = getHomeCoords();
-			
+
 			this.parameters = gmeConfig.parameters;
 			this.getVersion = function() { return gmeConfig.parameters.version; };
 			this.getGeograph = function(coords) {
@@ -1546,7 +1547,7 @@ var gmeResources = {
 						}, this.options));
 					}
 				};
-				
+
 			function GME_displayPoints(plist, map, context) {
 				var bounds = new L.LatLngBounds(), i, p, layers = L.featureGroup(), ll, op, PinIcon = L.Icon.extend({iconSize: new L.Point(20, 23),iconAnchor: new L.Point(10,23)});
 				function checkType(t) {
@@ -1624,7 +1625,7 @@ var gmeResources = {
                     return filtered;
                 }
                 var filteredOpts = filterOpts(options);
-                
+
 				if (typeof url === "string") {
 					return (/\{q\}/).test(url)?(new L.GME_QuadkeyLayer(url, filteredOpts)):((/\{s4\}|\{x100\}/).test(url)?(new L.GME_complexLayer(url,filteredOpts)):((/\{x\}/).test(url)?(new L.TileLayer(url, filteredOpts)):(new L.TileLayer.WMS(url, filteredOpts))));
 				}
@@ -2117,7 +2118,7 @@ var gmeResources = {
                         }
 					}
 					popupContent += "</p>";
-						
+
 					popup.setLatLng(e.latlng);
 					popup.setContent(popupContent);
 					control._map.addLayer(popup);
@@ -2390,7 +2391,7 @@ var gmeResources = {
 						console.warn("updateScale didn't have working map");
 						return;
 					}
-					
+
 					function updateMap() {
 						var bound = map.getBounds();
 						var width = formatDistance(Math.cos(map.getCenter().lat * L.LatLng.DEG_TO_RAD) * 111319.49079327358 * Math.abs(bound.getSouthWest().lng - bound.getSouthEast().lng));
@@ -2432,7 +2433,7 @@ var gmeResources = {
 					return c;
 				}
 			};
-			
+
 			function GME_load_widget(map) {
 				var control = new L.GME_Widget().addTo(map);
 				$(control._container).addClass("gme-left").css("top", "20px");
@@ -2620,7 +2621,7 @@ if(document.querySelector("head[data-gme-version]")) {
 	console.error("Aborting: GME already running on page: " + document.location);
 	return;
 }
-document.documentElement.firstChild.setAttribute("data-gme-version", gmeResources.parameters.version); 
+document.documentElement.firstChild.setAttribute("data-gme-version", gmeResources.parameters.version);
 
 for (i = 0; i < pageTests.length; i++) {
 	if (pageTests[i][1].test(document.location.pathname)) {
@@ -2669,7 +2670,7 @@ if(gmeResources.env.storage) {
 			} catch (e) {
 				console.warn("GME: Could not parse stored configuration parameters.");
 			}
-		} 
+		}
 		/* Import old-style custom maps */
 		customJSON = localStorage.getItem("GME_custom");
 		if (customJSON) {
@@ -2682,7 +2683,7 @@ if(gmeResources.env.storage) {
 				delete localStorage.GME_custom;
 			} catch (e) {
 				console.warn("GME: Could not parse stored custom maps.");
-			} 
+			}
 		}
 		/* Remove old-style builtin maps */
 		if (gmeResources.parameters.includeMaps) {
@@ -2726,7 +2727,7 @@ if (!gmeResources.env.dragdrop) {
 	gmeResources.script.drop = gmeResources.script.drag;
 }
 
-insertCSS(gmeResources.css.main); 
+insertCSS(gmeResources.css.main);
 if(gmeResources.env.storage) {
 	insertPage('GME_config', gmeResources.html.config, 'Configure GME v' + gmeResources.parameters.version);
 	insertPage('GME_format', gmeResources.html.customInfo, 'Custom Mapsource Format', 'GME_config');
@@ -2758,7 +2759,7 @@ switch(gmeResources.env.page) {
 				break;
 			}
 		}
-		
+
 		if (target && target2) {
 			var grDiv = document.createElement("div"), hereDiv = document.createElement("div");
 			grDiv.innerHTML = '<h5>Ordnance Survey Grid Reference :</h5><dl><dt>Grid reference : </dt><dd><form name="grForm" id="grForm"><input type="text" class="Text EqualWidthInput" maxlength="50" size="15" name="grRef" id="grRef" placeholder="SU122422">&nbsp;<input type="submit" class="Button blockWithModalSpinner" name="submitGR" value="Go" id="grSub"></form></dd></dl><h5>Freeform coordinates</h5><dl><dt>Coordinates :</dt><dd><form name="coordForm" id="coordForm"><input type="text" class="Text EqualWidthInput" maxlength="50" size="15" name="gme_coords" id="gme_coords" placeholder="N 51° 10.683′ W 001° 49.604′"/>&nbsp;<input type="submit" class="Button blockWithModalSpinner" name="gme_coords_sub" value="Go" id="gme_coords_sub"/></form></dd></dl>';
