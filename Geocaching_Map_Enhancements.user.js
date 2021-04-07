@@ -3,7 +3,7 @@
 // @version     0.8.4
 // @author      cghove
 // @oujs:author JRI
-// @namespace   ttps://github.com/cghove/Geocaching-Map-Enhancements
+// @namespace   https://github.com/cghove/Geocaching-Map-Enhancements
 // @description Adds extra maps and grid reference search to Geocaching.com, along with several other enhancements.
 // @include     https://www.geocaching.com/*
 // @license     MIT; http://www.opensource.org/licenses/mit-license.php
