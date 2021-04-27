@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        Geocaching Map Enhancements
-// @version     0.8.4
+// @version     0.8.5
 // @author      cghove
 // @oujs:author JRI
 // @namespace   https://github.com/cghove/Geocaching-Map-Enhancements
@@ -34,8 +34,8 @@
 var gmeResources = {
 	parameters: {
 		// Defaults
-		version: "0.8.4",
-		versionMsg: "Bugfix update: fixed bug with missing settings icon etc, forked to github.",
+		version: "0.8.5",
+		versionMsg: "Bugfix update: fixed bug GME not loading after latest update to geocaching.com.",
 		brightness: 1,	// Default brightness for maps (0-1), can be overridden by custom map parameters.
 		filterFinds: false, // True filters finds out of list searches.
 		follow: false,	// Locator widget follows current location (moving map mode)
@@ -45,16 +45,14 @@ var gmeResources = {
 		defaultMap: "OpenStreetMap",
 		maps: [
 	//	{alt:"Readable Name", tileUrl: "URL template including {s} (subdomain) and either {q} (quadkey) or {x},{y},{z} (Google/TMS tile coordinates + zoom)", subdomains: "0123", minZoom: 0, maxZoom: 24, attribution: "Copyright message (HTML allowed)", name: "shortname", overlay:false }
-			{alt:"OpenStreetMap",tileUrl:"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",name:"osm",subdomains:"abc"},
-            {alt:"OpenCycleMap",tileUrl:"https://tile.thunderforest.com/cycle/{z}/{x}/{y}.png",name:"ocm"},
+			{ "alt":"Statkart Topo", "name":"Statens kartverk - Topografisk norgeskart 4", "tileUrl":"https://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=topo4&zoom={z}&x={x}&y={y}", "attribution":"<a href='Kartverkethttp://www.statkart.no/'>Kartverket</a>, <a href='Geoveksthttp://www.kartverket.no/nor/Land/Fagomrader/Geovekst/'>Geovekst</a> og <a href='Norsk'>http://www.npolar.no/'>Norsk Polarinstitutt</a>", "minZoom":0, "maxZoom":18, "tileSize":256 },
+                        {alt:"OpenStreetMap",tileUrl:"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",name:"osm",subdomains:"abc"},
+                        {alt:"OpenCycleMap",tileUrl:"https://tile.thunderforest.com/cycle/{z}/{x}/{y}.png",name:"ocm"},
 			{alt:"Bing Maps", tileUrl: "https://ecn.t{s}.tiles.virtualearth.net/tiles/r{q}?g=864&mkt=en-gb&lbl=l1&stl=h&shading=hill&n=z", subdomains: "0123", minZoom: 1, maxZoom: 20, attribution: "<a href=\'https://www.bing.com/maps/\'>Bing</a> map data copyright Microsoft and its suppliers", name: "bingmap",ignore:true},
 			{alt:"Bing Aerial View", tileUrl:"https://ecn.t{s}.tiles.virtualearth.net/tiles/a{q}?g=737&n=z", subdomains: "0123", minZoom: 1, maxZoom: 20, attribution: "<a href=\'https://www.bing.com/maps/\'>Bing</a> map data copyright Microsoft and its suppliers", name: "bingaerial" },
 			{alt:"Google Maps",tileUrl:"https://mt.google.com/vt?&x={x}&y={y}&z={z}",name:"googlemaps",attribution:"<a href=\'https://maps.google.com/\'>Google</a> Maps",subdomains:"1234",tileSize:256,maxZoom:22},
 			{alt:"Google Satellite",tileUrl:"https://mt.google.com/vt?lyrs=s&x={x}&y={y}&z={z}",name:"googlemapssat",attribution:"<a href=\'https://maps.google.com/\'>Google</a> Maps Satellite",subdomains:"1234",tileSize:256,maxZoom:22},
-			{alt:"Freemap Slovakia Hiking", tileUrl: "http://t{s}.freemap.sk/T/{z}/{x}/{y}.jpeg", attribution: "Map &copy; <a href='http://www.freemap.sk/'>Freemap Slovakia</a>, data &copy; <a href='http://openstreetmap.org'>OpenStreetMap</a> contributors", subdomains: "1234", minZoom: 8, maxZoom: 16, ignore: true},
-			{alt:"Freemap Slovakia Bicycle", tileUrl: "http://t{s}.freemap.sk/C/{z}/{x}/{y}.jpeg", attribution: "Map &copy; <a href='http://www.freemap.sk/'>Freemap Slovakia</a>, data &copy; <a href='http://openstreetmap.org'>OpenStreetMap</a> contributors", subdomains: "1234", minZoom: 8, maxZoom: 16, ignore: true},
-			{alt:"Freemap Slovakia Car", tileUrl: "http://t{s}.freemap.sk/A/{z}/{x}/{y}.jpeg", attribution: "Map &copy; <a href='http://www.freemap.sk/'>Freemap Slovakia</a>, data &copy; <a href='http://openstreetmap.org'>OpenStreetMap</a> contributors", subdomains: "1234", minZoom: 8, maxZoom: 16, ignore: true},
-            {alt:"Hillshading", tileUrl:"http://{s}.tiles.wmflabs.org/hillshading/{z}/{x}/{y}.png", subdomains: "abc", attribution:"Hillshading by <a	 href=\'https://wiki.openstreetmap.org/wiki/Hike_%26_Bike_Map\'>Colin Marquardt</a> from NASA SRTM data", overlay: true}
+			{alt:"Hillshading", tileUrl:"http://{s}.tiles.wmflabs.org/hillshading/{z}/{x}/{y}.png", subdomains: "abc", attribution:"Hillshading by <a	 href=\'https://wiki.openstreetmap.org/wiki/Hike_%26_Bike_Map\'>Colin Marquardt</a> from NASA SRTM data", overlay: true}
 		]
 	},
 	css: {
@@ -130,7 +128,7 @@ var gmeResources = {
 		dragdrop: (document.createElement('span').draggable !== undefined),
 		geolocation: !!navigator.geolocation,
 		init: [],
-		loggedin: (!!document.getElementById("ctl00_uxLoginStatus_divSignedIn") || !!document.getElementById("uxLoginStatus_divSignedIn")),
+		loggedin: (!!document.getElementById("player-profile") || !!document.getElementById("player-profile")),
 		page: "default",
 		storage: false,
 		xhr: (typeof GM_xmlhttpRequest === 'function') ? 'GM' : ((typeof GM === 'object' && typeof GM.xmlHttpRequest === 'function') ? 'GM4': '')
