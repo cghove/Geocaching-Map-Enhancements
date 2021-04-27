@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        Geocaching Map Enhancements
-// @version     0.8.4
+// @version     0.8.5
 // @author      cghove
 // @oujs:author JRI
 // @namespace   https://github.com/cghove/Geocaching-Map-Enhancements
